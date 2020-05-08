@@ -1,0 +1,10 @@
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    
+}
+
+* {
+    outline: 1px solid red;
+    outline-offset: -1px;
+}
