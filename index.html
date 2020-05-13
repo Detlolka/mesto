@@ -5,27 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width:device-width, initial-scale=1, minimum-scale=1">
     <link rel="stylesheet" href="pages/index.css">
-    <title>Проэкт Место</title>
+    <title>Проект Место</title>
 </head>
 
 <body class="root">
     <div class="page">
+        <section class="popup">
+            <div class="popup__container">
+                <form class="popup__form">
+                    <p class="popup__title">Редактировать профиль</p>
+                    <input type="text" value="" class="popup__input popup__input-name">
+                    <input type="text" value="" class="popup__input popup__input-about">
+                    <button type="submit" class="popup__save">Сохранить</button>
+                    <button type="button" class="popup__close"></button>                    
+                </form>
+            </div>
+        </section>
+        
         <header class="header">
             <img class="header__logo" src="./images/logo/logo_header.svg" alt="Логотип">
         </header>
+
         <main class="content">
             <section class="profile">
                 <img class="profile__avatar" src="images/avatar.jpg" alt="Аватарка">
                 <div class="profile__info">
                     <div class="profile__container">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button class="profile__editButton"><img class="profile__editButton-image"
+                        <button type="button" class="profile__editButton"><img class="profile__editButton-image"
                                 src="./images/EditButton.svg" alt="Форма"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
-                <button class="profile__addButton"><img class="profile__addButton-image" src="./images/AddButton.svg"
-                        alt="Добавить"></button>
+                <button type="button" class="profile__addButton"></button>
             </section>
 
             <section class="elements">
@@ -70,13 +82,15 @@
                         <p class="element__title">Карачаево-Ч...</p>
                         <img class="element__like" src="./images/likes.svg" title="Лайк">
                     </div>
-                </div>                
+                </div>
             </section>
+
         </main>
         <footer class="footer">
             <p class="footer__author">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

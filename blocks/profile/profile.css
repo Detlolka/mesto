@@ -6,12 +6,18 @@
 @import url("./__editButton/profile__editButton.css");
 @import url("./__editButton-image/profile__editButton-image.css");
 @import url("./__addButton/profile__addButton.css");
-@import url("./__addButton-image/profile__addButton-image.css");
-
 .profile {
     max-width: 882px;
     margin: 0 auto;
     padding-top: 37px;
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width: 906px) {
+    .profile {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
 }

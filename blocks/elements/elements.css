@@ -9,3 +9,10 @@
     grid-row-gap: 21px;
     grid-column-gap: 18px;
 }
+
+@media (max-width: 420px) {
+    .elements {
+        padding-right: 19px;
+        padding-left: 19px;
+    }
+}

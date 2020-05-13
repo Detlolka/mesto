@@ -5,5 +5,19 @@
     color: #FFFFFF;
     margin-top: 0;
     margin-bottom: 0;
-    max-width: 295px;           
+    max-width: 295px;            
+}
+
+@media (max-width: 906px) {
+    .profile__title {        
+        margin-top: 15px;
+    }  
+}
+
+@media (max-width: 410px) {
+    .profile__title {
+        margin-top: 10px;
+        font-size: 27px;
+        line-height: 56px;
+    }    
 }

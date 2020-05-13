@@ -6,5 +6,21 @@
     color: #FFFFFF;
     margin-top: 16px;
     margin-bottom: 0;
-    max-width: 318px;
+    max-width: 318px;    
+}
+
+@media (max-width: 906px) {    
+    .profile__subtitle {
+        margin-top: 12px;
+        text-align: center;
+    } 
+}
+
+@media (max-width: 410px) {    
+    .profile__subtitle {
+        margin-top: 0px;
+        margin-right: 30px;
+        font-size: 14px;
+        line-height: 17px;
+    }    
 }
