@@ -11,8 +11,7 @@
 }
 
 @media (max-width: 420px) {
-    .elements {
-        padding-right: 19px;
-        padding-left: 19px;
+    .elements {        
+        margin: auto;
     }
 }

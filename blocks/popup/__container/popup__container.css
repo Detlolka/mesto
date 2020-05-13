@@ -6,7 +6,6 @@
     border-radius: 10px;        
     animation: translate .3s linear;
     padding: 34px 36px 36px;
-    box-sizing: border-box;
-       
+    box-sizing: border-box;       
 }
 

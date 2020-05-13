@@ -6,7 +6,10 @@
     color: #FFFFFF;
     margin-top: 16px;
     margin-bottom: 0;
-    max-width: 318px;    
+    max-width: 318px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;    
 }
 
 @media (max-width: 906px) {    

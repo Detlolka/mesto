@@ -10,7 +10,8 @@
     height: 50px;
     border-radius: 2px;
     border: none;
-    margin-top: 18px;    
+    margin-top: 18px;
+    transition: 1s;      
 }
 
 .popup__save:hover {

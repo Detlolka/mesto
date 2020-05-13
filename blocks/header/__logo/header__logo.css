@@ -11,3 +11,9 @@
         margin-bottom: 31px;     
     }
 }
+
+@media (max-width: 320px) {
+    .header__logo {
+        max-width: 103px;        
+    }
+}
