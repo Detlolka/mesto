@@ -2,6 +2,8 @@
 @import url("./__about/element__about.css");
 @import url("./__title/element__title.css");
 @import url("./__like/element__like.css");
+@import url("./__del/element__del.css");
+@import url("./__like/_active/element__like_active.css");
 
 .element {
     max-width: 282px;
@@ -9,5 +11,6 @@
     background-color: #fff;     
     display: flex;
     flex-direction: column;
-    overflow: hidden;    
+    overflow: hidden;
+    position: relative;    
 }

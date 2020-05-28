@@ -4,8 +4,17 @@
 @import url("./__input/popup__input.css");
 @import url("./__input/__input_name/popup__input_name.css");
 @import url("./__input/__input_about/popup__input_about.css");
+@import url("./__input/__input_image/popup__input_image.css");
+@import url("./__input/__input_place/popup__input_place.css");
 @import url("./__save/popup__save.css");
+@import url("./__save/__save_card/popup__save_card.css");
 @import url("./__close/popup__close.css");
+@import url("./_card/popup_card.css");
+@import url("./_profile/popup_profile.css");
+@import url("./_image/popup_image.css");
+@import url("./__image-container.css/popup__image-container.css");
+@import url("./__desctiption/popup__description.css");
+@import url("./__picture/popup__picture.css");
 
 .popup {
     position: fixed;
@@ -14,10 +23,13 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    z-index: 2;
-    display: none;
+    z-index: 1;
+    display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s linear;
 }
 
 

@@ -28,49 +28,7 @@
                 <button type="button" class="profile__addButton"></button>
             </section>
 
-            <section class="elements">
-                <div class="element">
-                    <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-                    <div class="element__about">
-                        <p class="element__title">Карачаевск</p>
-                        <button type="button" class="element__like" aria-label="Лайк"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/elbrus.png" alt="Эльбрус">
-                    <div class="element__about">
-                        <p class="element__title">Гора Эльбрус</p>
-                        <img class="element__like" src="./images/likes.svg" title="Лайк">
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/dombai.png" alt="Домбай">
-                    <div class="element__about">
-                        <p class="element__title">Домбай</p>
-                        <img class="element__like" src="./images/likes.svg" title="Лайк">
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/elbrus.png" alt="Эльбрус">
-                    <div class="element__about">
-                        <p class="element__title">Гора Эльбрус</p>
-                        <img class="element__like" src="./images/likes.svg" title="Лайк">
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/dombai.png" alt="Домбай">
-                    <div class="element__about">
-                        <p class="element__title">Домбай</p>
-                        <img class="element__like" src="./images/likes.svg" title="Лайк">
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-                    <div class="element__about">
-                        <p class="element__title">Карачаево-Черкессия</p>
-                        <img class="element__like" src="./images/likes.svg" title="Лайк">
-                    </div>
-                </div>
+            <section class="elements">                       
             </section>
 
         </main>
@@ -78,7 +36,7 @@
             <p class="footer__author">&copy; 2020 Mesto Russia</p>
         </footer>
 
-        <section class="popup">
+        <section class="popup popup_profile">
             <div class="popup__container">
                 <form class="popup__form" name="profile" method="GET" action="#">
                     <p class="popup__title">Редактировать профиль</p>
@@ -86,11 +44,37 @@
                     <input type="text" name="about" value="" class="popup__input popup__input_about" placeholder="Исследователь океана" required>
                     <button type="submit" class="popup__save">Сохранить</button>
                     <button type="button" class="popup__close" aria-label="Закрыть"></button>                    
-                </form>
-            </div>
+                </form>                
         </section>
-
+        <section class="popup popup_card">
+            <div class="popup__container">
+                <form class="popup__form popup__form_card" name="profile" method="GET" action="#">
+                    <p class="popup__title">Новое место</p>
+                    <input type="text" name="profile-name" value="" class="popup__input popup__input_place"  placeholder="Название" required>
+                    <input type="text" name="about" value="" class="popup__input popup__input_image" placeholder="Ссылка на картинку" required>
+                    <button type="submit" class="popup__save popup__save_card">Создать</button>
+                    <button type="button" class="popup__close" aria-label="Закрыть"></button>                    
+                </form>                
+        </section>
+        <section class="popup popup_image">
+            <div class="popup__image-container">
+                <img class="popup__picture" src="" alt="">
+                <p class="popup__description"></p>
+                <button type="button" class="popup__close" aria-label="Закрыть"></button>
+            </div>                             
+        </section>
     </div>
+    <template id="element">
+        <div class="element">
+            <img class="element__image" src="" alt="">
+            <div class="element__about">
+                <p class="element__title"></p>
+                <button type="button" class="element__like" aria-label="Лайк"></button>
+            </div>
+            <button type="button" class="element__del" aria-label="Удалить"></button>
+        </div>
+    </template>        
+    
     <script src="./js/script.js"></script>
 </body>
 

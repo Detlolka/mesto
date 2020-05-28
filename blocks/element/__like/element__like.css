@@ -6,5 +6,10 @@
     width: 21px;
     height: 19px;
     border: 0;
-    margin-top: 31px;    
+    margin-top: 31px;
+    transition: 0.8s;    
+}
+
+.element__like:hover {
+    opacity: 0.6;
 }
