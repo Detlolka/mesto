@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width:device-width, initial-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="stylesheet" href="pages/index.css">
     <title>Проект Место</title>
 </head>
@@ -40,8 +40,8 @@
             <div class="popup__container">
                 <form class="popup__form" name="profile" method="GET" action="#">
                     <p class="popup__title">Редактировать профиль</p>
-                    <input type="text" name="profile-name" value="" class="popup__input popup__input_name"  placeholder="Жак-Ив Кусто" required>
-                    <input type="text" name="about" value="" class="popup__input popup__input_about" placeholder="Исследователь океана" required>
+                    <input type="text" name="profile-name" value="Жак-Ив Кусто" class="popup__input popup__input_name"  placeholder="Имя" required>
+                    <input type="text" name="about" value="Исследователь океана" class="popup__input popup__input_about" placeholder="О себе" required>
                     <button type="submit" class="popup__save">Сохранить</button>
                     <button type="button" class="popup__close" aria-label="Закрыть"></button>                    
                 </form>                
@@ -50,8 +50,8 @@
             <div class="popup__container">
                 <form class="popup__form popup__form_card" name="profile" method="GET" action="#">
                     <p class="popup__title">Новое место</p>
-                    <input type="text" name="profile-name" value="" class="popup__input popup__input_place"  placeholder="Название" required>
-                    <input type="text" name="about" value="" class="popup__input popup__input_image" placeholder="Ссылка на картинку" required>
+                    <input type="text" name="place-name" value="" class="popup__input popup__input_place"  placeholder="Название" required>
+                    <input type="text" name="URL" value="" class="popup__input popup__input_image" placeholder="Ссылка на картинку" required>
                     <button type="submit" class="popup__save popup__save_card">Создать</button>
                     <button type="button" class="popup__close" aria-label="Закрыть"></button>                    
                 </form>                
