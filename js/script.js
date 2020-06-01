@@ -16,11 +16,14 @@ const addButton = document.querySelector('.profile__addButton');
 const editButton = document.querySelector('.profile__editButton');
 
 
-function closePopup(popup) {                            //закрытие Popups
+function closePopup(popup) {
+   if (!popup.target.closest('.popup_opened')) {
+       return;
+   }                            //закрытие Popups
    if (popup.target) {
-       popup = popup.target.closest('.popup_opened');       
-   }
-       popup.classList.remove('popup_opened');
+     popup = popup.target.closest('.popup_opened');      
+   } 
+   popup.classList.remove('popup_opened');    
 }
 
 
@@ -86,41 +89,29 @@ initialCards.forEach( item => {                             // функция д
         return elements.prepend(createCard(item.name, item.link));       
     });
 
-
-function listenCards (evt) {                                    //функция условий для слушателей
-    if (evt.target.classList.contains('element__like')) {
-        toggleLike(evt);
-    }
-    if (evt.target.classList.contains('element__del')) {
-        deleteElement(evt);
-    }
-    if (evt.target.classList.contains('element__image')) {
-        popupImageOpen(evt)
-    }
-}
-
-function toggleLike (evt) {                                       // лайки
-    evt.target.classList.toggle('element__like_active');
-}
-
-function deleteElement (evt) {                                     //удаление карточек
-    evt.target.closest('.element').remove();
-}
-
 function popupImageOpen (evt) {
     popupImagePicture.src = evt.target.src;
     popupDescription.textContent = evt.target.getAttribute('alt');
     openPopup(popupImage);
 }
 
-elements.addEventListener("click", listenCards);                 // Слушатель для элементов карты
+
 
 
 function createCard (placeValue, imageValue) {
     const copyCard = element.cloneNode(true);
     copyCard.querySelector(".element__title").textContent = placeValue;
     copyCard.querySelector(".element__image").src = imageValue;
-    copyCard.querySelector(".element__image").alt = placeValue;                             
+    copyCard.querySelector(".element__image").alt = placeValue;
+    copyCard.querySelector(".element__like").addEventListener("click", function (evt){
+        evt.target.classList.toggle('element__like_active');
+    });
+    copyCard.querySelector(".element__del").addEventListener("click", function (evt) {
+        evt.target.closest(".element").remove();
+    });
+    copyCard.querySelector(".element__image").addEventListener("click", function (evt) {
+        popupImageOpen(evt);
+    });                             
     return copyCard;
 }
 
