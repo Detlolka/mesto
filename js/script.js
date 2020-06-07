@@ -11,21 +11,27 @@ const popupImagePicture = popupImage.querySelector('.popup__picture'); // кар
 const popupDescription = popupImage.querySelector('.popup__description'); // Текст под картинкой
 const placeName = document.querySelector('.popup__input_place'); // интпут места
 const placeImage = document.querySelector('.popup__input_image'); // инпут для изображения карточки
-const addButton = document.querySelector('.profile__addButton');
-const editButton = document.querySelector('.profile__editButton');
-const popupProfileCloseBtn = popupProfile.querySelector('.popup__close');
-const popupCardCloseBtn = popupCard.querySelector('.popup__close');
-const popupImageCloseBtn = popupImage.querySelector('.popup__close');
+const addButton = document.querySelector('.profile__addButton');  // открытие попапа карт
+const editButton = document.querySelector('.profile__editButton'); // Открытие попапа профиля
+const popupProfileCloseBtn = popupProfile.querySelector('.popup__close'); // закрытие профиля
+const popupCardCloseBtn = popupCard.querySelector('.popup__close');  // закрытие попапа карт
+const popupImageCloseBtn = popupImage.querySelector('.popup__close');  // закрытие попапа картинки
 
 
-function closePopup(popup) {   
-   popup.classList.remove('popup_opened');    
+
+
+function closePopup(popup) {                          //закрытие Popups
+   popup.classList.remove('popup_opened');
+   popup.removeEventListener('click', overlayHandler);
+   document.removeEventListener('keydown', escHandler);      
 }
 
 
 
 function openPopup (popup) {                           //  Открытие Popups
-    popup.classList.add('popup_opened'); 
+    popup.classList.add('popup_opened');
+    popup.addEventListener('click', overlayHandler);
+    document.addEventListener('keydown', escHandler);    
 }
 
 function popupProfileOpen () {      // открытие попапа профиля
@@ -118,14 +124,26 @@ function cardInput (evt) {
     closePopup(popupCard);       
 }
 
+function escHandler (evt) {                        // закрытие на кнопку Esc
+    if (evt.key === 'Escape') {
+        closePopup(document.querySelector('.popup_opened'));
+    }
+}
 
-editButton.addEventListener("click", popupProfileOpen);  
+function overlayHandler (evt) {                        // закрытие по щелчку мыши на клик по фону попапов
+    if (evt.target.classList.contains('popup')) {
+           closePopup(evt.target);
+    }
+}
+
+editButton.addEventListener('click', popupProfileOpen);  
 addButton.addEventListener('click', popupCardOpen);
 formElement.addEventListener('submit', formSubmitHandler);
 formAddCard.addEventListener('submit', cardInput);
 popupProfileCloseBtn.addEventListener('click', () => closePopup(popupProfile));
 popupCardCloseBtn.addEventListener('click', () => closePopup(popupCard));
 popupImageCloseBtn.addEventListener('click', () => closePopup(popupImage));
+
 
 
 
