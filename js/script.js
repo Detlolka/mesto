@@ -16,6 +16,8 @@ const editButton = document.querySelector('.profile__editButton'); // Откры
 const popupProfileCloseBtn = popupProfile.querySelector('.popup__close'); // закрытие профиля
 const popupCardCloseBtn = popupCard.querySelector('.popup__close');  // закрытие попапа карт
 const popupImageCloseBtn = popupImage.querySelector('.popup__close');  // закрытие попапа картинки
+const eventClearForm = new Event('clearForm', {});
+
 
 
 
@@ -31,7 +33,10 @@ function closePopup(popup) {                          //закрытие Popups
 function openPopup (popup) {                       //  Открытие Popups
     popup.classList.add('popup_opened');
     popup.addEventListener('click', overlayHandler);
-    document.addEventListener('keydown', escHandler);    
+    document.addEventListener('keydown', escHandler);
+    if (popup.querySelector('.popup__form')) {
+        popup.querySelector('.popup__form').dispatchEvent(eventClearForm);
+    }    
 }
 
 function popupProfileOpen () {      // открытие попапа профиля
@@ -154,6 +159,10 @@ formAddCard.addEventListener('submit', cardInput);
 popupProfileCloseBtn.addEventListener('click', () => closePopup(popupProfile));
 popupCardCloseBtn.addEventListener('click', () => closePopup(popupCard));
 popupImageCloseBtn.addEventListener('click', () => closePopup(popupImage));
+
+
+
+
 
 
 

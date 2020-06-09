@@ -31,17 +31,29 @@ function handleFormInput (formElement, submitButton, options) {   //провер
     submitButton.classList.toggle(options.inactiveButtonClass, hasErrors);
 }
 
-const enableValidation = (options) => {                                                  //Валидация
-    const formList = Array.from(document.querySelectorAll(options.formSelector));   
+const enableValidation = (options) => {        //функция валидации
+    //находим формы и делаем из них подобие массива                                               
+    const formList = Array.from(document.querySelectorAll(options.formSelector));
+    //перебираем массив форм   
     formList.forEach( formElement => {
+        //находим кнопку отправки формы
         const submitButtons = formElement.querySelector(options.submitButtonSelector);  
-
-        formElement.addEventListener('input', () => handleFormInput(formElement, submitButtons, options));       
-        const inputElements = Array.from(formElement.querySelectorAll(options.inputSelector)); 
+             //проверка кнопки на валидность
+        formElement.addEventListener('input', () => handleFormInput(formElement, submitButtons, options));
+        //создаем псевдомассив инпутов       
+        const inputElements = Array.from(formElement.querySelectorAll(options.inputSelector));
+             //вешаем на каждый инпут событие 'Инпут' и проверяем форму его на валидность.
          inputElements.forEach(input => {                                      
              input.addEventListener('input', evt => {                          
                  checkErrors(evt, options);                    
             });            
+        });
+        //пользовательское событие через  dispatchEvent, позволяющие стирать ошибки и проверять на валидность при повторном открытии формы
+        formElement.addEventListener('clearForm', evt  => {
+            inputElements.forEach(input => {
+                hideInput(input, options);
+                handleFormInput(formElement, submitButtons, options);
+            });
         });
     });   
 }
