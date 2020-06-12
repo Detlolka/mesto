@@ -36,7 +36,7 @@
             <p class="footer__author">&copy; 2020 Mesto Russia</p>
         </footer>
 
-        <section class="popup popup_profile">
+        <div class="popup popup_profile">
             <div class="popup__container">
                 <form class="popup__form" name="profile" method="GET" action="#" novalidate>
                     <p class="popup__title">Редактировать профиль</p>
@@ -50,8 +50,9 @@
                     <button type="submit" class="popup__save">Сохранить</button>
                     <button type="button" class="popup__close" aria-label="Закрыть"></button>
                 </form>
-        </section>
-        <section class="popup popup_card">
+            </div>
+        </div>
+        <div class="popup popup_card">
             <div class="popup__container">
                 <form class="popup__form popup__form_card" name="profile" method="GET" action="#" novalidate>
                     <p class="popup__title">Новое место</p>
@@ -64,14 +65,15 @@
                     <button type="submit" class="popup__save popup__save_card">Создать</button>
                     <button type="button" class="popup__close" aria-label="Закрыть"></button>
                 </form>
-        </section>
-        <section class="popup popup_image">
+            </div>
+        </div>
+        <div class="popup popup_image">
             <div class="popup__image-container">
                 <img class="popup__picture" src="" alt="">
                 <p class="popup__description"></p>
                 <button type="button" class="popup__close" aria-label="Закрыть"></button>
             </div>
-        </section>
+        </div>
     </div>
     <template id="element">
         <div class="element">

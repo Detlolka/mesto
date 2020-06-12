@@ -6,7 +6,7 @@
 @import url("./__like/_active/element__like_active.css");
 
 .element {
-    max-width: 282px;
+    width: 282px;    
     border-radius: 10px;
     background-color: #fff;     
     display: flex;
