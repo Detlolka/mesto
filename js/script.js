@@ -18,22 +18,22 @@ const popupCardCloseBtn = popupCard.querySelector('.popup__close');  // закр
 const popupImageCloseBtn = popupImage.querySelector('.popup__close');  // закрытие попапа картинки
 const eventClearForm = new Event('clearForm', {});
 
+function closePopup(popup) {                          //закрытие Popups
+    popup.classList.remove('popup_opened');          
+ };
+
 function escHandler (evt) {                        // закрытие на кнопку Esc
     if (evt.key === 'Escape') {
         closePopup(document.querySelector('.popup_opened'));
+        this.removeEventListener('keydown', escHandler);
     }
 };
 
 function overlayHandler (evt) {                        // закрытие по щелчку мыши на клик по фону попапов
     if (evt.target.classList.contains('popup')) {
-           closePopup(evt.target);
+        closePopup(evt.target);
+        this.removeEventListener('click', overlayHandler);
     }
-};
-
-function closePopup(popup) {                          //закрытие Popups
-   popup.classList.remove('popup_opened');
-   popup.removeEventListener('click', overlayHandler);
-   document.removeEventListener('keydown', escHandler);         
 };
 
 function openPopup (popup) {                       //  Открытие Popups
