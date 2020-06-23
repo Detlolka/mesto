@@ -33,7 +33,7 @@ export class Card {
     };
 
     _setEventListeners () {     // Метод навешивания слушателей
-        this._element.addEventListener('click', () => {            
+        this._element.querySelector('.element__like').addEventListener('click', () => {            
             this._toggleLike();            
         });
         this._element.querySelector('.element__del').addEventListener('click', () => {
