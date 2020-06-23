@@ -1,4 +1,5 @@
 import { Card } from './card.js';
+import { FormValidator } from './validate.js';
 
 const initialCards = [
     {
@@ -27,10 +28,22 @@ const initialCards = [
     }
 ];
 
+const enableValidationOptions ={               //валидация
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_invalid',
+    inputErrorClass: 'popup__input_invalid',
+    //errorClass: 'popup__error_visible'
+  };
+
+
 const popupProfile = document.querySelector('.popup_profile'); // Форма Popup для профиля
 const popupCard = document.querySelector('.popup_card'); // popup для добавление карточек
-const formElement = popupProfile.querySelector('.popup__form'); // Форма
+const formElement = popupProfile.querySelector('.popup__form'); // Форма профиля
+const popupProfileValid = new FormValidator(enableValidationOptions, formElement).enableValidation(); //Валидация формы профиля
 const formAddCard = popupCard.querySelector('.popup__form_card'); // Форма добавление карт
+const popupCardValid = new FormValidator(enableValidationOptions, formAddCard).enableValidation(); //Валидация формы карт
 export const popupImage = document.querySelector('.popup_image'); //popup для фото
 const nameInput = formElement.querySelector('.popup__input_name'); // Поле ввода имени    
 const jobInput = formElement.querySelector('.popup__input_about'); // Поле с доп.информацией
@@ -46,7 +59,8 @@ const popupProfileCloseBtn = popupProfile.querySelector('.popup__close'); // з�
 const popupCardCloseBtn = popupCard.querySelector('.popup__close');  // закрытие попапа карт
 export const popupImageCloseBtn = popupImage.querySelector('.popup__close');  // закрытие попапа картинки
 const elements = document.querySelector(".elements"); // Блок куда добавлять template элементы
-const eventClearForm = new Event('clearForm', {});
+const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
+
 
 
 function closePopup(popup) {                          //закрытие Popups
@@ -117,16 +131,8 @@ function cardInput (evt) {                   //Создание карточки
     closePopup(popupCard);       
 }
 
-const enableValidationOptions ={               //валидация
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_invalid',
-    inputErrorClass: 'popup__input_invalid',
-    //errorClass: 'popup__error_visible'
-  };
 
-enableValidation(enableValidationOptions);
+
 
 editButton.addEventListener('click', popupProfileOpen);  
 addButton.addEventListener('click', popupCardOpen);
