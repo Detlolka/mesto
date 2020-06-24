@@ -10,7 +10,8 @@
     height: 50px;
     margin-left: auto;
     align-self: center;
-    transition: 1s;      
+    transition: 1s;
+    outline: none;      
 }
 
 .profile__addButton:hover {

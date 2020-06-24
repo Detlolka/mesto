@@ -11,7 +11,8 @@
     align-self: flex-end;
     margin-left: 17px;
     margin-bottom: 12px;
-    transition: 1s;     
+    transition: 1s;
+    outline: none;     
 }
 
 .profile__editButton:hover {
