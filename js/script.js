@@ -1,6 +1,7 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import { initialCards } from './data.js';
+import { popupImage, openPopup, closePopup  } from './utils.js';
 
 
 
@@ -22,9 +23,6 @@ popupProfileValid.enableValidation();
 const formAddCard = popupCard.querySelector('.popup__form_card'); // Форма добавление карт
 const popupCardValid = new FormValidator(enableValidationOptions, formAddCard); //Валидация формы карт
 popupCardValid.enableValidation();
-const popupImage = document.querySelector('.popup_image'); //popup для фото
-const popupImagePicture = popupImage.querySelector('.popup__picture'); // картинка Popup
-const popupDescription = popupImage.querySelector('.popup__description'); // Текст под картинкой
 const nameInput = formElement.querySelector('.popup__input_name'); // Поле ввода имени    
 const jobInput = formElement.querySelector('.popup__input_about'); // Поле с доп.информацией
 const profileName = document.querySelector('.profile__title'); // Заголовок профиля
@@ -37,41 +35,6 @@ const popupProfileCloseBtn = popupProfile.querySelector('.popup__close'); // з�
 const popupCardCloseBtn = popupCard.querySelector('.popup__close');  // закрытие попапа карт
 const popupImageCloseBtn = popupImage.querySelector('.popup__close');  // закрытие попапа картинки
 const elements = document.querySelector(".elements"); // Блок куда добавлять template элементы
-const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
-
-
-
-
-
-
-function closePopup(popup) {                          //закрытие Popups
-    popup.classList.remove('popup_opened');    
-    popup.removeEventListener('click', overlayHandler);
-    document.removeEventListener('keydown', escHandler);          
- };
-
-function escHandler (evt) {                        // закрытие на кнопку Esc
-    if (evt.key === 'Escape') {
-        closePopup(document.querySelector('.popup_opened'));        
-    }
-};
-
-function overlayHandler (evt) {                        // закрытие по щелчку мыши на клик по фону попапов
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);        
-    }
-};
-
-export function openPopup (popup) {                       //  Открытие Popups
-    popup.classList.add('popup_opened');
-    popup.addEventListener('click', overlayHandler);
-    document.addEventListener('keydown', escHandler);
-    if (popup.querySelector('.popup__form')) {
-        popup.querySelector('.popup__form').dispatchEvent(eventClearForm);
-    }    
-};
-
-
 
 
 function popupProfileOpen () {                 // открытие попапа профиля
@@ -86,14 +49,6 @@ function popupCardOpen () {                  // открытие попапа д
     placeImage.value = "";       
     openPopup(popupCard); 
 };
-
-export function popupImageOpen ({name, link}) {
-    popupDescription.textContent = name;
-    popupImagePicture.src = link;
-    popupImagePicture.alt = name;
-    openPopup(popupImage);
-}
-
  
 function formSubmitHandler (evt) {                  // Отправка данных в профиль
     evt.preventDefault();       

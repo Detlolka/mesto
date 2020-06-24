@@ -1,4 +1,4 @@
-import { popupImageOpen } from "./script.js";
+import { popupImageOpen } from './utils.js';
 
 export class Card {
     constructor(data, cardSelector) {         // конструктор класса Card;
