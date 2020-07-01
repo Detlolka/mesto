@@ -1,9 +1,8 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { initialCards } from './data.js';
-import { popupImage, openPopup, closePopup  } from './utils.js';
-
-
+import { Card } from './js/Card.js';
+import { FormValidator } from './js/FormValidator.js';
+import { initialCards } from './js/data.js';
+import { popupImage, openPopup, closePopup  } from './js/utils.js';
+import './pages/index.css';
 
 const enableValidationOptions ={               //валидация
     formSelector: '.popup__form',
@@ -90,6 +89,7 @@ formAddCard.addEventListener('submit', cardInput);
 popupProfileCloseBtn.addEventListener('click', () => closePopup(popupProfile));
 popupCardCloseBtn.addEventListener('click', () => closePopup(popupCard));
 popupImageCloseBtn.addEventListener('click', () => closePopup(popupImage));
+
 
 
 

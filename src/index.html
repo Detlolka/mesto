@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <link rel="stylesheet" href="pages/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">    
     <title>Проект Место</title>
 </head>
 
@@ -17,7 +16,7 @@
 
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="images/avatar.jpg" alt="Аватарка">
+                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватарка">
                 <div class="profile__info">
                     <div class="profile__container">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -69,7 +68,7 @@
         </div>
         <div class="popup popup_image">
             <div class="popup__image-container">
-                <img class="popup__picture" src="" alt="">
+                <img class="popup__picture" alt="">
                 <p class="popup__description"></p>
                 <button type="button" class="popup__close" aria-label="Закрыть"></button>
             </div>
@@ -77,14 +76,13 @@
     </div>
     <template id="element">
         <div class="element">
-            <img class="element__image" src="" alt="">
+            <img class="element__image" alt="">
             <div class="element__about">
                 <p class="element__title"></p>
                 <button type="button" class="element__like" aria-label="Лайк"></button>
             </div>
             <button type="button" class="element__del" aria-label="Удалить"></button>
         </div>
-    </template>     
-    <script type="module" src="./js/script.js"></script>         
+    </template>          
 </body>
 </html>
