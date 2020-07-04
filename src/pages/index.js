@@ -1,8 +1,13 @@
-import { Card } from './js/Card.js';
-import { FormValidator } from './js/FormValidator.js';
-import { initialCards } from './js/data.js';
-import { popupImage, openPopup, closePopup  } from './js/utils.js';
-import './pages/index.css';
+import { cardsContainerSelector,
+                profileName,
+                profileAbout } from '../utils/constants.js'
+import  Card  from '../components/Card.js';
+import  FormValidator  from '../components/FormValidator.js';
+import  { initialCards }  from '../utils/data.js';
+import { popupImage, openPopup, closePopup  } from '../utils/utils.js';
+import  Section  from '../components/Section.js';
+import   UserInfo from '../components/UserInfo.js';
+import './index.css';
 
 const enableValidationOptions ={               //валидация
     formSelector: '.popup__form',
@@ -24,8 +29,7 @@ const popupCardValid = new FormValidator(enableValidationOptions, formAddCard); 
 popupCardValid.enableValidation();
 const nameInput = formElement.querySelector('.popup__input_name'); // Поле ввода имени    
 const jobInput = formElement.querySelector('.popup__input_about'); // Поле с доп.информацией
-const profileName = document.querySelector('.profile__title'); // Заголовок профиля
-const profileAbout = document.querySelector('.profile__subtitle'); // Подзаголовок профиля
+
 const placeName = document.querySelector('.popup__input_place'); // интпут места
 const placeImage = document.querySelector('.popup__input_image'); // инпут для изображения карточки
 const addButton = document.querySelector('.profile__addButton');  // открытие попапа карт
@@ -56,7 +60,7 @@ function formSubmitHandler (evt) {                  // Отправка данн
     closePopup(popupProfile);       
 };
 
-
+const user = new UserInfo({profileName, profileAbout});
 
  function renderCards(cards) {      //Подгрузка карт из массива
     cards.forEach((item) => {        

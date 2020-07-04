@@ -1,6 +1,6 @@
-import { popupImageOpen } from './utils.js';
+import { popupImageOpen } from '../utils/utils.js';
 
-export class Card {
+export default class Card {
     constructor(data, cardSelector) {         // конструктор класса Card;
         this._name = data.name;        
         this._link = data.link;
@@ -27,7 +27,7 @@ export class Card {
     };
     
     _popupImageOpen () {       // Метод открытия попапа Карт
-        popupImageOpen ({name: this._name, link: this._link });
+        popupImageOpen({name: this._name, link: this._link });
     };
 
     _setEventListeners () {     // Метод навешивания слушателей
