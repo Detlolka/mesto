@@ -1,10 +1,9 @@
-import { popupImageOpen } from '../utils/utils.js';
-
 export default class Card {
-    constructor(data, cardSelector) {         // конструктор класса Card;
-        this._name = data.name;        
-        this._link = data.link;
-        this._cardSelector = cardSelector;               
+    constructor({data, cardSelector, handleCardClick }) {         // конструктор класса Card;
+        this._name = data.name;               
+        this._link = data.link;        
+        this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;   // функция открытия попапа с картинкой            
     };
 
     _getTemplate () {         // Метод извлечения данных из template Элемента
@@ -15,7 +14,11 @@ export default class Card {
         .cloneNode(true);        
         
         return cardElement
-    }; 
+    };
+    
+    _handleImageClick() {                         // метод клика по фото
+          return this._handleCardClick();
+    }
 
     _toggleLike () {         // Метод установки/снятия лайка
         this._element.querySelector('.element__like').classList.toggle('element__like_active');
@@ -24,11 +27,8 @@ export default class Card {
 
     _deleteElement () {          // Метод удаление карты
         this._element.closest(".element").remove();
-    };
+    };   
     
-    _popupImageOpen () {       // Метод открытия попапа Карт
-        popupImageOpen({name: this._name, link: this._link });
-    };
 
     _setEventListeners () {     // Метод навешивания слушателей
         this._element.querySelector('.element__like').addEventListener('click', () => {            
@@ -38,7 +38,7 @@ export default class Card {
             this._deleteElement();
         });
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._popupImageOpen();
+            return this._handleImageClick();
         });
     };
 

@@ -39,7 +39,7 @@
             <div class="popup__container">
                 <form class="popup__form" name="profile" method="GET" action="#" novalidate>
                     <p class="popup__title">Редактировать профиль</p>
-                    <input type="text" name="profile-name" value="Жак-Ив Кусто" class="popup__input popup__input_name"
+                    <input type="text" name="profileName" value="Жак-Ив Кусто" class="popup__input popup__input_name"
                         id="input-name" placeholder="Имя" required minlength="2" maxlength="40"
                         pattern="[А-ЯЁа-яёA-Za-z-\s]*">
                     <span class="error" id="input-name-error"></span>
@@ -55,10 +55,10 @@
             <div class="popup__container">
                 <form class="popup__form popup__form_card" name="profile" method="GET" action="#" novalidate>
                     <p class="popup__title">Новое место</p>
-                    <input type="text" name="place-name" value="" class="popup__input popup__input_place"
+                    <input type="text" name="placeName" value="" class="popup__input popup__input_place"
                        id="input-place" placeholder="Название" required minlength="1" maxlength="30" pattern="[А-ЯЁа-яёA-Za-z-\s]*">
                     <span class="error" id="input-place-error"></span>
-                    <input type="url" name="URL" value="" class="popup__input popup__input_image"
+                    <input type="url" name="placePhoto" value="" class="popup__input popup__input_image"
                         id="input-url" placeholder="Ссылка на картинку" required>
                     <span class="error" id="input-url-error"></span>
                     <button type="submit" class="popup__save popup__save_card">Создать</button>

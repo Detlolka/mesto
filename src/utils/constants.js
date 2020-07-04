@@ -1,3 +1,2 @@
-export const cardsContainerSelector = document.querySelector(".elements"); //Секция карт
-export const profileName = document.querySelector('.profile__title'); // Заголовок профиля
-export const profileAbout = document.querySelector('.profile__subtitle'); // Подзаголовок профиля
+export const addButton = document.querySelector('.profile__addButton');  // открытие попапа карт
+export const editButton = document.querySelector('.profile__editButton'); // Открытие попапа профиля
