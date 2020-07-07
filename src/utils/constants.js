@@ -1,2 +1,9 @@
-export const addButton = document.querySelector('.profile__addButton');  // открытие попапа карт
-export const editButton = document.querySelector('.profile__editButton'); // открытие попапа профиля
+export const enableValidationOptions ={               //валидация
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_invalid',
+    inputErrorClass: 'popup__input_invalid',
+    //errorClass: 'popup__error_visible'
+  };
+

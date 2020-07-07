@@ -2,23 +2,23 @@ export default class FormValidator {
     constructor (options, formSelector) {         // Конструктор Валидации
         this._options = options;         
         this._formSelector = formSelector;
-};  
+}
 
    _errorSpan (input) {                       //span Ошибки
         return document.querySelector(`#${input.id}-error`)
-};
+}
 
    _showInputError (input, options) {                //Выдаём ошибку
         const error = this._errorSpan(input);
         error.textContent = input.validationMessage;
         input.classList.add(options.inputErrorClass);
-};
+}
 
    _hideInputError (input, options) {              //Убираем ошибку
         const error = this._errorSpan(input);
         error.textContent = '';
         input.classList.remove(options.inputErrorClass);   
-};
+}
 
    _checkErrors (inputElement, options) {               // Проверка инпута на валидность
        if (inputElement.validity.valid) {
@@ -26,13 +26,13 @@ export default class FormValidator {
     } else {
         this._showInputError(inputElement, options);
     }
-};
+}
 
     _changeButtonStatus (formElement, options, buttonSelector) {   //проверка сабмита на валидность
         const hasErrors = !formElement.checkValidity();
         buttonSelector.disabled = hasErrors;
         buttonSelector.classList.toggle(options.inactiveButtonClass, hasErrors);
-};
+}
 
     enableValidation () {        //функция валидации
                                                   
