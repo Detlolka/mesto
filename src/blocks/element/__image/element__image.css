@@ -2,8 +2,7 @@
     width: 100%;
     height: 282px;
     object-fit: cover;
-    transition: 0.8s;
-        
+    transition: 0.8s;        
 }
 
 .element__image:hover {

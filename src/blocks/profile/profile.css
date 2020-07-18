@@ -5,6 +5,8 @@
 @import url("./__subtitle/profile__subtitle.css");
 @import url("./__editButton/profile__editButton.css");
 @import url("./__addButton/profile__addButton.css");
+@import url("./__image/profile__image.css");
+
 .profile {
     max-width: 882px;
     margin: 0 auto;
