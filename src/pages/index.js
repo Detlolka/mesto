@@ -1,8 +1,8 @@
 import  Card  from '../components/Card.js';
 import  FormValidator  from '../components/FormValidator.js';
-import  { initialCards }  from '../utils/data.js';
 import Section  from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import { enableValidationOptions } from '../utils/constants.js';
@@ -29,15 +29,28 @@ function placeCard ({name, link}) {         // Функция геренации
      return card.generateCard();
 }
 
+const api = new Api({
+    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
+    headers: {
+      authorization: "3d90ed66-5470-4061-9f08-ef73936051ae",
+      "Content-Type": "application/json",
+    }
+  });
+
+   api.getInitialCard().then(res => {
+       console.log(res)
+   })
+  
+/*
 const cards = new Section({                //Класс секции
     itemSelector: '.elements',
-    items: initialCards,   
+    items: {}   
     renderer: ({name, link}) => {
         const cardElement = placeCard({name, link});        
         cards.addItem(cardElement);
     }
 });
-
+*/
 cards.renderer();
 
 const popupCard = new PopupWithForm({      // форма для добавление карточек
