@@ -5,8 +5,7 @@ export default class Api {
   }
   
   _response(res) {
-      if (res.ok) {
-          console.log(res.json())
+      if (res.ok) {п          
           return res.json()
       }
       return Promise.reject(`Что то пошло не так: ${res.status}`)      
@@ -27,13 +26,13 @@ export default class Api {
     .then(this._response)    
   }
 
-  changeUserInfo({name, about}) {  // PATCH-запрос на обновление даннных пользователя с сервера
+  changeUserInfo(name, about) {  // PATCH-запрос на обновление даннных пользователя с сервера
     return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-            name: name,
-            about: about
+            name,
+            about
         })        
     })
     .then(this._response)   

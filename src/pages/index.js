@@ -12,10 +12,11 @@ const addButton = document.querySelector('.profile__addButton');  // откры�
 const editButton = document.querySelector('.profile__editButton'); // открытие попапа профиля
 const profileNameInput = document.querySelector('.popup__input_name'); //Поле ввода имени профиля
 const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
+
 //Экземпляры классов
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
 const popupPicture = new PopupWithImage('.popup_image');  // экземпляр класса карт
-const profileInfo = new UserInfo({userName:'.profile__title', userAbout:'.profile__subtitle'}); // Экземпляр класса UserInfo
+const profileInfo = new UserInfo('.profile__title','.profile__subtitle'); // Экземпляр класса UserInfo
 const cardItem = new Section('.elements'); // экземляр класса секции
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
@@ -70,9 +71,9 @@ const popupProfile = new PopupWithForm({
             profileName: name,
             profileAbout: about
         } = formdate;        
-        api.changeUserInfo({name, about})
+        api.changeUserInfo(name, about)
         .then(() => {
-            profileInfo.setUserInfo({name, about});
+            profileInfo.setUserInfo(name, about);
         })
         .catch((err) => console.error(`Ошибка: ${err}`))       
     }
@@ -85,19 +86,18 @@ popupProfileValid.enableValidation();
 
 //Конец секции попапа профиля
 
-
-
-function getPopupProfileInputs ({name, about}) { // Функция установки изначальных полей
+function getPopupProfileInputs (name, about) { // Функция установки изначальных полей
     profileNameInput.value = name;
     profileAboutInput.value = about;
 }
 
 function openPopupProfile () {                                      // Открытие попапа профиля
-    const info = profileInfo.getUserInfo();    
+    const info = profileInfo.getUserInfo();
+    popupProfile.changeButtonName('Сохранить');    
     popupProfile.open({
         customEvent: eventClearForm,        
     })
-    getPopupProfileInputs({name: info.name, about: info.about}); 
+    getPopupProfileInputs(info.name, info.about); 
 }
 
 function openPopupCard () {                          // Открытие попапа карт
