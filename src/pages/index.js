@@ -20,7 +20,7 @@ const profileAvatarPopup = document.querySelector('.profile__avatar');
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
 const popupPicture = new PopupWithImage('.popup_image');  // экземпляр класса карт
 const profileInfo = new UserInfo('.profile__title','.profile__subtitle'); // Экземпляр класса UserInfo
-const cardItem = new Section('.elements'); // экземляр класса секции
+
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
     headers: {
@@ -49,29 +49,39 @@ popupAvatar.setEventListeners(); //Слушатели попапа аватар�
 const popupWithAvatarValid = new FormValidator(enableValidationOptions, popupAvatar.getForm()); // Валидация формы аватарки
 popupWithAvatarValid.enableValidation();
 
-function placeCard ({name, link}) {         // Функция геренации карт
-    const card = new Card({
-        cardSelector : '#element',
-        data: {name, link},
+function placeCard (data) {         // Функция геренации карт
+    const card = new Card(data, {
+        cardSelector : '#element',        
         handleCardClick: () => {
-            popupPicture.open({name, link})
+            popupPicture.open(data.name, data.link)
         }
-    });
+    });    
      return card.generateCard();
 }
+
+const cardItems = new Section('.elements', (data) => {    // экземляр класса секции
+    const cardElement = placeCard(data);
+    cardItems.addItem(cardElement);
+}); 
 
 
 // Попап формы добавление карт
 
-const popupCard = new PopupWithForm({      // форма для добавление карточек
+const popupCard = new PopupWithForm({      
     popupSelector: '.popup_card',
     handleFormSubmit: (formdate) => {
+        popupCard.changeButtonName('Сохранение...')
         const {
             placeName: name,
             placePhoto: link
         } = formdate;
-        const cardElem = placeCard({name, link});
-        cards.addItem(cardElem);
+        api.createCard(name, link)
+          .then((data) => {
+            const cardElem = placeCard(data);
+            cardItems.addItem(cardElem);
+            popupCard.close()
+          })
+          .catch((err) => console.error(err));        
     }
 });
 
@@ -116,7 +126,8 @@ function openPopupProfile () {                                     // Откры
     })     
 }
 
-function openPopupCard () {                          // Открытие попапа карт
+function openPopupCard () {
+    popupCard.changeButtonName('Сохранить');                          // Открытие попапа карт
     popupCard.open({
         customEvent: eventClearForm
     })
@@ -139,7 +150,8 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
 .then((res) => {
   profileInfo.setUserInfo(res[1].name, res[1].about);
   setInputsValueProfile(res[1].name, res[1].about)  
-  profileImage.src = res[1].avatar;
+  profileImage.src = res[1].avatar;  
+  cardItems.rendererCards(res[0], cardItems)
 })
 
 

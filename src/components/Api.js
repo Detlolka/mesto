@@ -17,6 +17,17 @@ export default class Api {
     .catch(err => console.error(`Ошибка: ${err}`))
 }
 
+  createCard (name, link) {  // POST-запрос на добавление карточки
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link
+      })      
+    })
+    .then(this._response)
+  }
   
 
   getUserInfo() {     //    GET-запрос на получение данных пользователя

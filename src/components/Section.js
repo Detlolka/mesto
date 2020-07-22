@@ -1,15 +1,16 @@
 export default class Section {
-    constructor(itemSelector) {       
+    constructor(itemSelector, renderer) {       
         this._container = document.querySelector(itemSelector);
+        this._renderer = renderer;
     }    
 
     addItem(element) {   //Вывод карточек в разметку
         this._container.prepend(element);
     }
 
-    renderer(cardData, renderer) {        //Перебор массива карт
-        cardData.forEach(item => {
-            renderer(item);
+    rendererCards(cardData, renderer) {        //Перебор массива карт
+        cardData.reverse().forEach(item => {            
+            return this._renderer(item)
         });
     }
 }

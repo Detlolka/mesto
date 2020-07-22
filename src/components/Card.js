@@ -1,6 +1,6 @@
 export default class Card {
-    constructor({ data, cardSelector, handleCardClick }) {         // конструктор класса Card;
-        this._name = data.name;
+    constructor( data , {cardSelector, handleCardClick }) {         // конструктор класса Card;
+        this._name = data.name;        
         this._link = data.link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;   // функция открытия попапа с картинкой            
