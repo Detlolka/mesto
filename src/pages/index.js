@@ -5,6 +5,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithAvatar from '../components/PopupWithAvatar.js';
 import { enableValidationOptions } from '../utils/constants.js';
 import './index.css';
 
@@ -12,7 +13,8 @@ const addButton = document.querySelector('.profile__addButton');  // откры�
 const editButton = document.querySelector('.profile__editButton'); // открытие попапа профиля
 const profileNameInput = document.querySelector('.popup__input_name'); //Поле ввода имени профиля
 const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
-const profileAvatar = document.querySelector('.profile__avatar'); //Аватарка профиля
+const profileImage = document.querySelector('.profile__image'); //Аватарка профиля
+const profileAvatarPopup = document.querySelector('.profile__avatar');
 
 //Экземпляры классов
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
@@ -28,6 +30,24 @@ const api = new Api({
   });
 
 popupPicture.setEventListeners(); //Слушатель попапа изображений
+
+const popupAvatar = new PopupWithAvatar({   //Экземпляр попапа аватарки
+    popupSelector: '.popup_avatar',
+    handleFormSubmit: (formdate) => {        
+        popupAvatar.changeButtonName('Загрузка...');
+        api.changeAvatar(formdate)
+        .then((res) => {
+            popupAvatar.setProfileAvatar(res.avatar);
+            popupAvatar.close();
+        })
+        .catch((err) => console.error(err));
+    } 
+})
+
+popupAvatar.setEventListeners(); //Слушатели попапа аватарки
+
+const popupWithAvatarValid = new FormValidator(enableValidationOptions, popupAvatar.getForm()); // Валидация формы аватарки
+popupWithAvatarValid.enableValidation();
 
 function placeCard ({name, link}) {         // Функция геренации карт
     const card = new Card({
@@ -86,12 +106,13 @@ popupProfile.setEventListeners(); //Слушатели формы профиля
 const popupProfileValid = new FormValidator(enableValidationOptions, popupProfile.getForm()); // Валидация попапа профиля
 popupProfileValid.enableValidation();
 
+// Конец секции попапа профиля
 
-function openPopupProfile () {                                      // Открытие попапа профиля
-    const info = profileInfo.getUserInfo();
+
+function openPopupProfile () {                                     // Открытие попапа профиля
     popupProfile.changeButtonName('Сохранить');    
     popupProfile.open({
-        customEvent: eventClearForm,        
+        customEvent: eventClearForm        
     })     
 }
 
@@ -101,14 +122,28 @@ function openPopupCard () {                          // Открытие поп�
     })
 }
 
-//Конец секции попапа профиля
+function openPopupAvatar () {
+    popupAvatar.changeButtonName('Сохранить');
+    popupAvatar.open({
+        customEvent: eventClearForm
+    })
+}
+
+function setInputsValueProfile(name, about) { // Установка данных в инпуты попапа профиля
+   profileNameInput.value = name;
+   profileAboutInput.value = about;
+}
+
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
 .then((res) => {
-  profileInfo.setUserInfo(res[1].name, res[1].about);  
-  profileAvatar.src = res[1].avatar;
+  profileInfo.setUserInfo(res[1].name, res[1].about);
+  setInputsValueProfile(res[1].name, res[1].about)  
+  profileImage.src = res[1].avatar;
 })
 
+
+profileAvatarPopup.addEventListener('click', openPopupAvatar); // Открытие попапа аватарки
 editButton.addEventListener('click', openPopupProfile);   // Открытие попапа профиля
 addButton.addEventListener('click', openPopupCard);       //Открытие попапа карт
 

@@ -37,6 +37,19 @@ export default class Api {
     })
     .then(this._response)   
  }
+
+  changeAvatar(avatar) {  //PATCH - запрос на обновление аватарки
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar
+      })
+    })
+    .then(this._response);
+  }
+
+
 }
 
 
