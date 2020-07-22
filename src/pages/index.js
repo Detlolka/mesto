@@ -12,6 +12,7 @@ const addButton = document.querySelector('.profile__addButton');  // откры�
 const editButton = document.querySelector('.profile__editButton'); // открытие попапа профиля
 const profileNameInput = document.querySelector('.popup__input_name'); //Поле ввода имени профиля
 const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
+const profileAvatar = document.querySelector('.profile__avatar'); //Аватарка профиля
 
 //Экземпляры классов
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
@@ -74,6 +75,7 @@ const popupProfile = new PopupWithForm({
         api.changeUserInfo(name, about)
         .then(() => {
             profileInfo.setUserInfo(name, about);
+            popupProfile.close()
         })
         .catch((err) => console.error(`Ошибка: ${err}`))       
     }
@@ -84,20 +86,13 @@ popupProfile.setEventListeners(); //Слушатели формы профиля
 const popupProfileValid = new FormValidator(enableValidationOptions, popupProfile.getForm()); // Валидация попапа профиля
 popupProfileValid.enableValidation();
 
-//Конец секции попапа профиля
-
-function getPopupProfileInputs (name, about) { // Функция установки изначальных полей
-    profileNameInput.value = name;
-    profileAboutInput.value = about;
-}
 
 function openPopupProfile () {                                      // Открытие попапа профиля
     const info = profileInfo.getUserInfo();
     popupProfile.changeButtonName('Сохранить');    
     popupProfile.open({
         customEvent: eventClearForm,        
-    })
-    getPopupProfileInputs(info.name, info.about); 
+    })     
 }
 
 function openPopupCard () {                          // Открытие попапа карт
@@ -105,6 +100,14 @@ function openPopupCard () {                          // Открытие поп�
         customEvent: eventClearForm
     })
 }
+
+//Конец секции попапа профиля
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+.then((res) => {
+  profileInfo.setUserInfo(res[1].name, res[1].about);  
+  profileAvatar.src = res[1].avatar;
+})
 
 editButton.addEventListener('click', openPopupProfile);   // Открытие попапа профиля
 addButton.addEventListener('click', openPopupCard);       //Открытие попапа карт

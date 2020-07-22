@@ -5,13 +5,13 @@ export default class Api {
   }
   
   _response(res) {
-      if (res.ok) {п          
+      if (res.ok) {          
           return res.json()
       }
       return Promise.reject(`Что то пошло не так: ${res.status}`)      
   }
 
-  getInitialCard() {                        //GET-запрос карточек
+  getInitialCards() {                        //GET-запрос карточек
     return fetch(`${this._baseUrl}/cards`, { headers: this._headers})
     .then(this._response)
     .catch(err => console.error(`Ошибка: ${err}`))
