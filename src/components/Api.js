@@ -18,16 +18,29 @@ export default class Api {
     .catch(err => console.error(`Ошибка: ${err}`))
 }
 
-  getUserData() {  // PATCH-запрос на обновление дангных пользователя с сервера
-      return fetch(`${this._baseUrl}/users/me`, {
-          method: 'PATCH',
-          headers: this._headers,
-          body: JSON.stringify({
-              name,
-              about
-          })
-      })
-      .then(this._response);
+  
+
+  getUserInfo() {     //    GET-запрос на получение данных пользователя
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers  
+    })
+    .then(this._response)    
   }
+
+  changeUserInfo({name, about}) {  // PATCH-запрос на обновление даннных пользователя с сервера
+    return fetch(`${this._baseUrl}/users/me`, {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+            name: name,
+            about: about
+        })        
+    })
+    .then(this._response)   
+ }
 }
+
+
+
+
 

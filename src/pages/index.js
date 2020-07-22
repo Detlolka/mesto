@@ -25,8 +25,6 @@ const api = new Api({
     }
   });
 
-
-
 popupPicture.setEventListeners(); //Слушатель попапа изображений
 
 function placeCard ({name, link}) {         // Функция геренации карт
@@ -41,12 +39,7 @@ function placeCard ({name, link}) {         // Функция геренации
 }
 
 
-   
-  
-
-
-
-
+// Попап формы добавление карт
 
 const popupCard = new PopupWithForm({      // форма для добавление карточек
     popupSelector: '.popup_card',
@@ -65,22 +58,34 @@ popupCard.setEventListeners();  // Слушатель формы карт
 const popupCardValid = new FormValidator(enableValidationOptions, popupCard.getForm()); //Валидация формы карт
 popupCardValid.enableValidation();
 
+// Конец секции формы добавления карт
 
-const popupProfile = new PopupWithForm({    // Попап профиля
+// Попап профиля
+
+const popupProfile = new PopupWithForm({    
     popupSelector: '.popup_profile',
     handleFormSubmit: (formdate) => {
+        popupProfile.changeButtonName('Загрузка...');
         const {
             profileName: name,
             profileAbout: about
         } = formdate;        
-        profileInfo.setUserInfo({name, about});
+        api.changeUserInfo({name, about})
+        .then(() => {
+            profileInfo.setUserInfo({name, about});
+        })
+        .catch((err) => console.error(`Ошибка: ${err}`))       
     }
 });
 
-popupProfile.setEventListeners();
+popupProfile.setEventListeners(); //Слушатели формы профиля
 
 const popupProfileValid = new FormValidator(enableValidationOptions, popupProfile.getForm()); // Валидация попапа профиля
 popupProfileValid.enableValidation();
+
+//Конец секции попапа профиля
+
+
 
 function getPopupProfileInputs ({name, about}) { // Функция установки изначальных полей
     profileNameInput.value = name;
