@@ -17,5 +17,17 @@ export default class Api {
     .then(this._response)
     .catch(err => console.error(`Ошибка: ${err}`))
 }
+
+  getUserData() {  // PATCH-запрос на обновление дангных пользователя с сервера
+      return fetch(`${this._baseUrl}/users/me`, {
+          method: 'PATCH',
+          headers: this._headers,
+          body: JSON.stringify({
+              name,
+              about
+          })
+      })
+      .then(this._response);
+  }
 }
 

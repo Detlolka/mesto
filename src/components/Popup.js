@@ -29,6 +29,12 @@ export default class Popup {
         document.removeEventListener('keydown', this._handleEscClose);
     }
 
+    changeButtonName(buttonName) { //Изменения имени кнопки сабмита в зависимости от загрузки данных/простоя
+        const button = this._popup.querySelector('.popup__save');
+        button.textContent = buttonName;
+
+    }
+
     open() {
         this._popup.classList.add('popup_opened');
     }

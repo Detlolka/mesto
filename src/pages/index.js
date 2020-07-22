@@ -10,11 +10,22 @@ import './index.css';
 
 const addButton = document.querySelector('.profile__addButton');  // открытие попапа карт
 const editButton = document.querySelector('.profile__editButton'); // открытие попапа профиля
+const profileNameInput = document.querySelector('.popup__input_name'); //Поле ввода имени профиля
+const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
+//Экземпляры классов
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
 const popupPicture = new PopupWithImage('.popup_image');  // экземпляр класса карт
 const profileInfo = new UserInfo({userName:'.profile__title', userAbout:'.profile__subtitle'}); // Экземпляр класса UserInfo
-const profileNameInput = document.querySelector('.popup__input_name'); //Поле ввода имени профиля
-const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
+const cardItem = new Section('.elements'); // экземляр класса секции
+const api = new Api({
+    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
+    headers: {
+      authorization: "3d90ed66-5470-4061-9f08-ef73936051ae",
+      "Content-Type": "application/json",
+    }
+  });
+
+
 
 popupPicture.setEventListeners(); //Слушатель попапа изображений
 
@@ -29,29 +40,13 @@ function placeCard ({name, link}) {         // Функция геренации
      return card.generateCard();
 }
 
-const api = new Api({
-    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
-    headers: {
-      authorization: "3d90ed66-5470-4061-9f08-ef73936051ae",
-      "Content-Type": "application/json",
-    }
-  });
 
-   api.getInitialCard().then(res => {
-       console.log(res)
-   })
+   
   
-/*
-const cards = new Section({                //Класс секции
-    itemSelector: '.elements',
-    items: {}   
-    renderer: ({name, link}) => {
-        const cardElement = placeCard({name, link});        
-        cards.addItem(cardElement);
-    }
-});
-*/
-cards.renderer();
+
+
+
+
 
 const popupCard = new PopupWithForm({      // форма для добавление карточек
     popupSelector: '.popup_card',
