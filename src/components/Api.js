@@ -29,16 +29,32 @@ export default class Api {
     .then(this._response)
   }
 
-  removeCard(cardId) {
+  removeCard(cardId) { // DELETE - запрос на удаление карточки
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers
     })
     .then(this._repsponce);
   }
+
+  likeCard(cardId) {  // PUT-запрос на лайк
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'PUT',
+      headers: this.headers
+    })
+    .then(this._response);
+  }
+
+  dislikeCard(cardId) {  // DELETE- запрос на лайк
+    return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._response);
+  }
   
 
-  getUserInfo() {     //    GET-запрос на получение данных пользователя
+  getUserInfo() {     // GET-запрос на получение данных пользователя
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers  
     })
@@ -57,7 +73,7 @@ export default class Api {
     .then(this._response)   
  }
 
-  changeAvatar(avatar) {  //PATCH - запрос на обновление аватарки
+  changeAvatar(avatar) {  // PATCH - запрос на обновление аватарки
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
