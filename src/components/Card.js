@@ -20,9 +20,10 @@ export default class Card {
     }
 
     _clickButtonLike() {
-        this._handleCardLike({
-            cardId: this._data.Id
-        })
+        this._handleCardLike( {
+            cardId: this._data._id 
+        }            
+        )        
     }
 
     _clickRemoveButton() {
@@ -33,10 +34,11 @@ export default class Card {
     }
 
     isliked() {
-        if (this._data.likes.some((like) => like._id === '62a85f38a6cb4f0e9b63649f')) {
+        if (this._data.likes.some(
+            (like) => like._id === '62a85f38a6cb4f0e9b63649f')) {
             return true
         } else {
-            return false
+            return  false
         }
     }
 
@@ -45,10 +47,14 @@ export default class Card {
     }
 
     _disLike() {
-        this._element.querySelector('.element__like').classList.remove('element__like_active'); //Дизлайк
+        this._element.querySelector('.element__like').classList.remove('element__like_active'); // Дизлайк
     }
 
-    changeLikes(data) {
+    _counterLikes() {
+        this._element.querySelector('.element__like-counter').textContent = this._data.likes.length; // счетчик лайков
+    }
+
+    changeLikes(data) {                                // Проверка на лайк
         this._data = data;
         this._counterLikes()
         if (this.isliked()) {
@@ -58,11 +64,7 @@ export default class Card {
         }
 
     }
-
-    _counterLikes() {
-        this._element.querySelector('.element__like-counter').textContent = this._data.likes.length;
-    }
-
+    
     _handleImageClick() {                         // метод клика по фото
         return this._handleCardClick();
     }
@@ -73,10 +75,10 @@ export default class Card {
         });
         this._element.querySelector('.element__like').addEventListener('click', () => {
             this._clickButtonLike();
-        })
+        });
         this._elementDel.addEventListener('click', () => {
             this._clickRemoveButton();
-        })
+        });
     }    
 
     generateCard() {        //Метод геренации карт
@@ -86,7 +88,7 @@ export default class Card {
         this._elementDel= this._element.querySelector('.element__del');        
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
-        if('62a85f38a6cb4f0e9b63649f' === this._data.owner._id) {
+        if('62a85f38a6cb4f0e9b63649f' === this._data.owner._id) {   // Если айди совпадает с ID карточки пользователя, то добавляется элемент  позволяющий удалять
             this._elementDel.classList.add('element__del_active');
         }
         this.changeLikes(this._data);

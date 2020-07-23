@@ -14,6 +14,8 @@ const addButton = document.querySelector('.profile__addButton');  // откры�
 const editButton = document.querySelector('.profile__editButton'); // открытие попапа профиля
 const profileNameInput = document.querySelector('.popup__input_name'); //Поле ввода имени профиля
 const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
+const cardNameInput = document.querySelector('.popup__input_place'); //Поле ввода имени карточки
+const cardUrlInput = document.querySelector('.popup__input_image'); //Поля ввода урл карточки
 const profileImage = document.querySelector('.profile__image'); //Аватарка профиля
 const profileAvatarPopup = document.querySelector('.profile__avatar');
 
@@ -99,6 +101,7 @@ const cardItems = new Section('.elements', (data) => {    // экземляр к
 
 // Попап формы добавление карт
 
+
 const popupCard = new PopupWithForm({
     popupSelector: '.popup_card',
     handleFormSubmit: (formdate) => {
@@ -108,8 +111,7 @@ const popupCard = new PopupWithForm({
             placePhoto: link
         } = formdate;
         api.createCard(name, link)
-            .then((data) => {
-                console.log(data.owner._id);
+            .then((data) => {                
                 const cardElem = placeCard(data);
                 cardItems.addItem(cardElem);
                 popupCard.close()
@@ -151,6 +153,16 @@ popupProfileValid.enableValidation();
 
 // Конец секции попапа профиля
 
+function clearInputsPopupCard () {   // Очищение инпутов попапа карт
+    cardNameInput.value = "";
+    cardUrlInput.value = "";
+}
+
+function setInputsValueProfile(name, about) { // Установка данных в инпуты попапа профиля
+    profileNameInput.value = name;
+    profileAboutInput.value = about;
+}
+
 
 function openPopupProfile() {                                     // Открытие попапа профиля
     popupProfile.changeButtonName('Сохранить');
@@ -159,8 +171,9 @@ function openPopupProfile() {                                     // Откры�
     })
 }
 
-function openPopupCard() {
-    popupCard.changeButtonName('Сохранить');                          // Открытие попапа карт
+function openPopupCard() {                     // Открытие попапа карт
+    popupCard.changeButtonName('Сохранить');
+    clearInputsPopupCard();                         
     popupCard.open({
         customEvent: eventClearForm
     })
@@ -171,11 +184,6 @@ function openPopupAvatar() {
     popupAvatar.open({
         customEvent: eventClearForm
     })
-}
-
-function setInputsValueProfile(name, about) { // Установка данных в инпуты попапа профиля
-    profileNameInput.value = name;
-    profileAboutInput.value = about;
 }
 
 

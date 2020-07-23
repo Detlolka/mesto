@@ -34,19 +34,19 @@ export default class Api {
       method: "DELETE",
       headers: this._headers
     })
-    .then(this._repsponce);
+    .then(this._response);
   }
 
   likeCard(cardId) {  // PUT-запрос на лайк
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'PUT',
-      headers: this.headers
+      headers: this._headers
     })
     .then(this._response);
   }
 
   dislikeCard(cardId) {  // DELETE- запрос на лайк
-    return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
     })
