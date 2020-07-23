@@ -28,6 +28,14 @@ export default class Api {
     })
     .then(this._response)
   }
+
+  removeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then(this._repsponce);
+  }
   
 
   getUserInfo() {     //    GET-запрос на получение данных пользователя

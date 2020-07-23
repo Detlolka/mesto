@@ -2,7 +2,8 @@ import  Card  from '../components/Card.js';
 import  FormValidator  from '../components/FormValidator.js';
 import Section  from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-import Api from '../components/Api.js'
+import Api from '../components/Api.js';
+import PopupWithRemove from '../components/PopupWithRemove.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithAvatar from '../components/PopupWithAvatar.js';
@@ -30,6 +31,16 @@ const api = new Api({
   });
 
 popupPicture.setEventListeners(); //Слушатель попапа изображений
+
+const popupRemove = new PopupWithRemove('.popup_delete-place', ({cardElement, cardId}) => {   //Экземпляр попап удаления карт
+    api.removeCard(cardId)
+    .then(() => {         
+        cardElement.remove();
+    })
+    .catch((err) => console.error(err));
+})
+
+popupRemove.setEventListeners() // Слушатели для попапа удаления карт
 
 const popupAvatar = new PopupWithAvatar({   //Экземпляр попапа аватарки
     popupSelector: '.popup_avatar',
@@ -85,7 +96,7 @@ const popupCard = new PopupWithForm({
     }
 });
 
-popupCard.setEventListeners();  // Слушатель формы карт
+popupCard.setEventListeners();  // Слушатели формы карт
 
 const popupCardValid = new FormValidator(enableValidationOptions, popupCard.getForm()); //Валидация формы карт
 popupCardValid.enableValidation();

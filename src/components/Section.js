@@ -8,7 +8,7 @@ export default class Section {
         this._container.prepend(element);
     }
 
-    rendererCards(cardData, renderer) {        //Перебор массива карт
+    rendererCards(cardData) {        //Перебор массива карт
         cardData.reverse().forEach(item => {            
             return this._renderer(item)
         });
