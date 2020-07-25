@@ -38,10 +38,12 @@ const popupRemove = new PopupWithRemove('.popup_delete-place', ({ cardElement, c
     api.removeCard(cardId)
         .then(() => {
             popupRemove.changeButtonName('Удаление...')
-            cardElement.remove();
-            popupRemove.close();
+            cardElement.remove();            
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => {
+            popupRemove.close();
+        })        
 })
 
 popupRemove.setEventListeners() // Слушатели для попапа удаления карт
@@ -52,10 +54,12 @@ const popupAvatar = new PopupWithAvatar({   //Экземпляр попапа а
         popupAvatar.changeButtonName('Загрузка...');
         api.changeAvatar(formdate)
             .then((res) => {
-                popupAvatar.setProfileAvatar(res.avatar);
+                popupAvatar.setProfileAvatar(res.avatar);                
+            })
+            .catch((err) => console.error(err))
+            .finally(() => {
                 popupAvatar.close();
             })
-            .catch((err) => console.error(err));
     }
 })
 
@@ -113,10 +117,12 @@ const popupCard = new PopupWithForm({
         api.createCard(name, link)
             .then((data) => {                
                 const cardElem = placeCard(data);
-                cardItems.addItem(cardElem);
-                popupCard.close()
+                cardItems.addItem(cardElem);                
             })
-            .catch((err) => console.error(err));
+            .catch((err) => console.error(err))
+            .finally(() => {
+                popupCard.close();
+            })
     }
 });
 
@@ -140,9 +146,12 @@ const popupProfile = new PopupWithForm({
         api.changeUserInfo(name, about)
             .then(() => {
                 profileInfo.setUserInfo(name, about);
-                popupProfile.close()
+                popupProfile.close();
             })
             .catch((err) => console.error(`Ошибка: ${err}`))
+            .finally(() => {
+                popupProfile.close();
+            })
     }
 });
 

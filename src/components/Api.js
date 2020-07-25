@@ -13,8 +13,7 @@ export default class Api {
 
   getInitialCards() {                        //GET-запрос карточек
     return fetch(`${this._baseUrl}/cards`, { headers: this._headers})
-    .then(this._response)
-    .catch(err => console.error(`Ошибка: ${err}`))
+    .then(this._response)    
 }
 
   createCard (name, link) {  // POST-запрос на добавление карточки
