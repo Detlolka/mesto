@@ -33,7 +33,7 @@ export default class Card {
         })
     }
 
-    isliked() {
+    isLiked() {
         if (this._data.likes.some(
             (like) => like._id === '62a85f38a6cb4f0e9b63649f')) {
             return true
@@ -57,7 +57,7 @@ export default class Card {
     changeLikes(data) {                                // Проверка на лайк
         this._data = data;
         this._counterLikes()
-        if (this.isliked()) {
+        if (this.isLiked()) {
             this._like();
         } else {
             this._disLike();

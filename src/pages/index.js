@@ -79,7 +79,7 @@ function placeCard(data) {         // Функция геренации карт
             popupRemove.open({ cardElement, cardId })
         },
         handleCardLike: ({ cardId }) => {
-            if (card.isliked()) {
+            if (card.isLiked()) {
                 api.dislikeCard(cardId)
                     .then((data) => {                        
                         card.changeLikes(data)
