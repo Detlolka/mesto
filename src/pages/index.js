@@ -6,7 +6,6 @@ import Api from '../components/Api.js';
 import PopupWithRemove from '../components/PopupWithRemove.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithAvatar from '../components/PopupWithAvatar.js';
 import { enableValidationOptions } from '../utils/constants.js';
 import './index.css';
 
@@ -22,7 +21,7 @@ const profileAvatarPopup = document.querySelector('.profile__avatar');
 //Экземпляры классов
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
 const popupPicture = new PopupWithImage('.popup_image');  // экземпляр класса карт
-const profileInfo = new UserInfo('.profile__title', '.profile__subtitle'); // Экземпляр класса UserInfo
+const profileInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__image', ''); // Экземпляр класса UserInfo
 
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
@@ -48,13 +47,17 @@ const popupRemove = new PopupWithRemove('.popup_delete-place', ({ cardElement, c
 
 popupRemove.setEventListeners() // Слушатели для попапа удаления карт
 
-const popupAvatar = new PopupWithAvatar({   //Экземпляр попапа аватарки
+const popupAvatar = new PopupWithForm({   //Экземпляр попапа аватарки
     popupSelector: '.popup_avatar',
     handleFormSubmit: (formdate) => {
         popupAvatar.changeButtonName('Загрузка...');
-        api.changeAvatar(formdate)
-            .then((res) => {
-                popupAvatar.setProfileAvatar(res.avatar);                
+        const {
+            avatarPhoto: link
+        } = formdate
+        api.changeAvatar(link)
+            .then(() => {
+                profileInfo.setUserInfo({
+                    avatar: link });                
             })
             .catch((err) => console.error(err))
             .finally(() => {
@@ -197,11 +200,11 @@ function openPopupAvatar() {
 
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
-    .then((res) => {
-        profileInfo.setUserInfo(res[1].name, res[1].about);
-        setInputsValueProfile(res[1].name, res[1].about);
-        profileImage.src = res[1].avatar;
-        cardItems.rendererCards(res[0], cardItems);        
+    .then(([cardData, userData]) => {        
+        profileInfo.setUserInfo(userData);
+        setInputsValueProfile(userData.name, userData.about);
+        profileImage.src = userData.avatar;
+               
     })
 
 

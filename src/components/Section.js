@@ -10,7 +10,7 @@ export default class Section {
 
     rendererCards(cardData) {        //Перебор массива карт
         cardData.reverse().forEach(item => {            
-            return this._renderer(item)
+            this._renderer(item)
         });
     }
 }
