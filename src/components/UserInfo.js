@@ -29,7 +29,7 @@ export default class UserInfo {
             this._user.avatar = avatar;      
             this._avatarProfile.src = avatar;
         }
-        if (id) {
+        if (_id) {
             this._user._id = _id;
         }              
     }

@@ -15,13 +15,13 @@ const profileNameInput = document.querySelector('.popup__input_name'); //Пол�
 const profileAboutInput = document.querySelector('.popup__input_about'); //Поле ввода информации о себе в профиле
 const cardNameInput = document.querySelector('.popup__input_place'); //Поле ввода имени карточки
 const cardUrlInput = document.querySelector('.popup__input_image'); //Поля ввода урл карточки
-const profileImage = document.querySelector('.profile__image'); //Аватарка профиля
 const profileAvatarPopup = document.querySelector('.profile__avatar');
 
 //Экземпляры классов
 const eventClearForm = new Event('clearForm', {}); // Пользовательский Ивент очистки формы
 const popupPicture = new PopupWithImage('.popup_image');  // экземпляр класса карт
 const profileInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__image', ''); // Экземпляр класса UserInfo
+const cardItems = new Section('.elements'); // Экземпляр класса секции
 
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-13",
@@ -71,8 +71,8 @@ popupAvatar.setEventListeners(); //Слушатели попапа аватар�
 const popupWithAvatarValid = new FormValidator(enableValidationOptions, popupAvatar.getForm()); // Валидация формы аватарки
 popupWithAvatarValid.enableValidation();
 
-function placeCard(data) {         // Функция геренации карт
-    const card = new Card(data, {
+function placeCard(data, userData) {         // Функция геренации карт
+    const card = new Card(data, userData, {
         cardSelector: '#element',
         handleCardClick: () => {
             popupPicture.open(data.name, data.link)
@@ -100,10 +100,7 @@ function placeCard(data) {         // Функция геренации карт
     return card.generateCard();
 }
 
-const cardItems = new Section('.elements', (data) => {    // экземляр класса секции
-    const cardElement = placeCard(data);
-    cardItems.addItem(cardElement);
-});
+
 
 
 // Попап формы добавление карт
@@ -119,7 +116,7 @@ const popupCard = new PopupWithForm({
         } = formdate;
         api.createCard(name, link)
             .then((data) => {                
-                const cardElem = placeCard(data);
+                const cardElem = placeCard(data, profileInfo.getUserInfo());
                 cardItems.addItem(cardElem);                
             })
             .catch((err) => console.error(err))
@@ -203,8 +200,12 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([cardData, userData]) => {        
         profileInfo.setUserInfo(userData);
         setInputsValueProfile(userData.name, userData.about);
-        profileImage.src = userData.avatar;
-               
+
+        const cardItems = new Section('.elements', (data) => {    // экземляр класса секции
+            const cardElement = placeCard(data, userData);
+            cardItems.addItem(cardElement);
+        }, cardData);
+        cardItems.rendererCards()               
     })
 
 

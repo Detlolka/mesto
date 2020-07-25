@@ -1,6 +1,7 @@
 export default class Card {
-    constructor(data, { cardSelector, handleCardClick, handleCardRemove, handleCardLike }) {         // конструктор класса Card;
+    constructor(data, userData, { cardSelector, handleCardClick, handleCardRemove, handleCardLike }) {         // конструктор класса Card;
         this._data = data;
+        this._userData = userData;
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
@@ -34,12 +35,7 @@ export default class Card {
     }
 
     isLiked() {
-        if (this._data.likes.some(
-            (like) => like._id === '62a85f38a6cb4f0e9b63649f')) {
-            return true
-        } else {
-            return  false
-        }
+        return !!(this._data.likes.some((like) => like._id === this._userData._id))             
     }
 
     _like() {
@@ -88,7 +84,7 @@ export default class Card {
         this._elementDel= this._element.querySelector('.element__del');        
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
-        if('62a85f38a6cb4f0e9b63649f' === this._data.owner._id) {   // Если айди совпадает с ID карточки пользователя, то добавляется элемент  позволяющий удалять
+        if(this._userData._id === this._data.owner._id) {   // Если айди совпадает с ID карточки пользователя, то добавляется элемент  позволяющий удалять
             this._elementDel.classList.add('element__del_active');
         }
         this.changeLikes(this._data);
